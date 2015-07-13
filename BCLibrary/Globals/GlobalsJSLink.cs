@@ -10,6 +10,14 @@ using System.Web.UI.WebControls;
 
 namespace BCLibrary.Globals
 {
+    /**
+     * The GlobalsJSLink custom control is used to translate globals' partial paths into complete <script> 
+     * references to globals Javascript resources. This method is necessary both because .NET assumes control of 
+     * <script> references as controls, but also because .NET doesn't allow dynamic rendering of paths (at least 
+     * not in the needed context).
+     * Example usage: <bc:GlobalsJSLink runat="server" FilePath="j/ghead.js?ver=3.3" />
+     * Example output (before .NET changes rendering): <script type='text/javascript' src='[globalsURI]j/ghead.js?ver=3.3'></script>
+     * **/
     [DefaultProperty("PathAndFile")]
     [ToolboxData("<{0}:GlobalsJSLink runat=server></{0}:GlobalsJSLink>")]
     public class GlobalsJSLink : Literal
@@ -19,6 +27,9 @@ namespace BCLibrary.Globals
         [DefaultValue("")]
         [Localizable(true)]
 
+        /**
+         * Optional parameter. Can be specified to override app-level globals URI setting.
+         * **/
         public string GlobalsURI
         {
             get
@@ -33,6 +44,9 @@ namespace BCLibrary.Globals
             }
         }
 
+        /**
+         * Partial path to needed globals Javascript resource.
+         * **/
         public string FilePath
         {
             get

@@ -9,6 +9,12 @@ using System.Web.UI.WebControls;
 
 namespace BCLibrary.Globals
 {
+    /**
+    * The GlobalsFileInclude custom control translates the given file path, reads the file, and includes the 
+    * content during rendering. This control is necesssary to replace server side includes since those do not 
+    * allow dynamic path creation.
+    * Example usage: <bc:GlobalsFileInclude runat="server" FilePath="h/gabranded.html" />
+    * **/
     [DefaultProperty("FilePath")]
     [ToolboxData("<{0}:GlobalsFileInclude runat=server></{0}:GlobalsFileInclude>")]
     public class GlobalsFileInclude : Literal
@@ -17,7 +23,10 @@ namespace BCLibrary.Globals
         [Category("Appearance")]
         [DefaultValue("")]
         [Localizable(true)]
-        
+
+        /**
+         * Optional parameter. Can be specified to override app-level globals path setting.
+         * **/
         public string GlobalsPath
         {
             get
@@ -31,6 +40,10 @@ namespace BCLibrary.Globals
                 ViewState["GlobalsPath"] = value;
             }
         }
+
+        /**
+        * Required, partial path to file to include.
+        * **/
         public string FilePath
         {
             get
@@ -61,6 +74,7 @@ namespace BCLibrary.Globals
             {
                 try
                 {
+                    //generate path, read file, and write to page output
                     string appRootPath = System.Web.HttpContext.Current.Server.MapPath("~");
                     string includePath = System.IO.Path.GetFullPath(System.IO.Path.Combine(appRootPath, _globalsPath));
                     System.IO.TextReader tr = new System.IO.StreamReader(includePath + FilePath);
