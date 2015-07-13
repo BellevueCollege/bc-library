@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>BCLibrary</id>
+    <version>0.1.0.0</version>
+    <authors>Bellevue College</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A library of helpful functions for use in Bellevue College applications.</description>
+    <releaseNotes>Initial alpha release of library.</releaseNotes>
+  </metadata>
+  <files>
+	<file src="bin\release\BCLibrary.dll" target="lib\net40" />
+  	<file src="bin\release\BCLibrary.dll" target="lib\net45" />
+  </files>
+</package>
